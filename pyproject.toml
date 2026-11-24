@@ -1,0 +1,9 @@
+[tool.pylint.messages_control]
+# AutoRed prioriza codigo compacto: se silencian avisos de estilo que no son errores.
+disable = [
+    "line-too-long", "missing-module-docstring", "missing-function-docstring", "missing-class-docstring",
+    "broad-exception-caught", "invalid-name", "unnecessary-lambda-assignment", "too-many-locals",
+    "too-many-branches", "too-many-statements", "too-many-return-statements", "global-statement",
+    "too-many-instance-attributes", "too-few-public-methods", "consider-using-with", "import-outside-toplevel", "use-maxsplit-arg", "subprocess-run-check",
+    "inconsistent-return-statements", "too-many-arguments", "too-many-positional-arguments", "multiple-statements", "redefined-builtin", "unused-argument", "protected-access",
+]

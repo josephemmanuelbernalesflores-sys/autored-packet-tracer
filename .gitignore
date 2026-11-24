@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Archivos locales de AutoRed (rutas y registros del equipo de cada usuario)
+config.json
+autored.log
+.perfil_chrome/
+.perfil_edge/
+.perfil/
+
+# Proyectos de Packet Tracer y exportaciones del motor
+*.pkt
+*.pts
+
+# Editor y sistema
+.vscode/
+~$*
+Thumbs.db

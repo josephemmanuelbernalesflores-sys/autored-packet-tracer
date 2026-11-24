@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AutoRed</title><link rel="icon" href="/favicon.ico">
+<style>
+:root{--bg:#e9eef3;--c:#fff;--b:#c9d3dd;--t:#16222e;--m:#5d6b7a;--nv:#0f2d4d;--a:#1b6fb5;--ok:#1a8f4c;--er:#c0392b;--ws:#fff;--gr:#e4eaf0}
+@media(prefers-color-scheme:dark){:root{--bg:#0c1219;--c:#141e29;--b:#25333f;--t:#e6edf3;--m:#8a9aaa;--nv:#0a1f36;--a:#4c9aff;--ok:#3ecf7a;--er:#ff6b5e;--ws:#101922;--gr:#1a2631}}
+*{box-sizing:border-box}body{margin:0;font:14px system-ui,sans-serif;background:var(--bg);color:var(--t)}
+header{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:var(--nv);color:#fff;border-bottom:3px solid #2aa3d8}
+header b{font-size:18px}header small{opacity:.7;margin-left:10px}.logo{display:flex;align-items:center;gap:10px}
+.tabs{background:#16456f;color:#fff;padding:0 20px;display:flex;gap:2px}.tabs span{padding:6px 16px;background:#1e5a8e;border-radius:6px 6px 0 0;font-size:13px}.tabs span.on{background:var(--ws);color:var(--t)}
+main{display:grid;grid-template-columns:minmax(300px,400px) minmax(0,1fr);gap:16px;max-width:1300px;margin:16px auto;padding:0 16px}
+@media(max-width:900px){main{grid-template-columns:minmax(0,1fr)}}
+section{min-width:0}.c{background:var(--c);border:1px solid var(--b);border-radius:8px;margin-bottom:14px;overflow:hidden}
+.c>h2{margin:0;padding:8px 14px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(#2a6aa3,#1b4f80)}.c>div{padding:14px}
+textarea,input,select{width:100%;font:inherit;padding:8px 10px;border:1px solid var(--b);border-radius:6px;background:var(--bg);color:var(--t)}
+button{font:inherit;padding:8px 14px;border:0;border-radius:6px;background:var(--a);color:#fff;cursor:pointer}button.g{background:var(--ok)}button.v{background:#8e44ad}
+button.t{background:transparent;color:var(--t);border:1px solid var(--b);padding:4px 10px;font-size:12px;margin:0 6px 6px 0}button:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}.pill{font-size:12px;padding:3px 10px;border-radius:99px;background:#fff2;border:1px solid #fff4}.on2{color:#7dffb0}.off{color:#ff9d94}
+.f{display:grid;grid-template-columns:1fr 110px;gap:6px 10px;align-items:center}.f input[type=checkbox]{width:auto;justify-self:start}.n{font-size:13px;color:var(--m);margin:6px 0}.e{color:var(--er)}
+.k{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}.k div{border:1px solid var(--b);border-radius:8px;padding:8px;text-align:center;color:var(--m);font-size:12px}.k b{display:block;font-size:22px;color:var(--t)}
+#ws{background:linear-gradient(var(--gr) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,var(--gr) 1px,transparent 1px) 0 0/24px 24px,var(--ws);border:1px solid var(--b);border-radius:6px}
+svg.d{width:100%;height:340px;display:block}svg text{font:11px system-ui;fill:var(--t);text-anchor:middle}.tray{display:flex;gap:18px;justify-content:center;padding:8px;font-size:11px;color:var(--m)}.tray span{display:flex;align-items:center;gap:5px}
+.vr{display:grid;grid-template-columns:22px 1fr auto;gap:2px 8px;font-size:13px;padding:4px 0;border-bottom:1px solid var(--b)}.vr i{font-style:normal}.vr small{color:var(--m)}
+.lab{padding:7px 10px;border:1px solid var(--b);border-radius:6px;margin-bottom:6px;cursor:pointer}.lab b{font-size:13px}.lab small{display:block;color:var(--m)}.lab.on{border-color:var(--a);background:#1b6fb522}.t.sel{background:var(--a);color:#fff}#cl{max-height:290px;overflow:auto;margin-top:6px}
+.pill.off{cursor:pointer}
+pre{background:#0a1118;color:#d6e2ee;padding:12px;border-radius:6px;overflow:auto;max-height:300px;font-size:12px;margin:0}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="i-router" viewBox="0 0 48 48"><ellipse cx="24" cy="31" rx="19" ry="8" fill="#1f5f99"/><rect x="5" y="17" width="38" height="14" fill="#2b7bc0"/><ellipse cx="24" cy="17" rx="19" ry="8" fill="#6bb6ee"/><path d="M12 17h24m-5-4 5 4-5 4M36 19H12m5-4-5 4 5 4" stroke="#fff" stroke-width="2" fill="none"/></symbol>
+<symbol id="i-switch" viewBox="0 0 48 48"><path d="M4 21l9-7h31l-9 7z" fill="#6fd0e4"/><rect x="4" y="21" width="31" height="14" fill="#1f8aa5"/><path d="M35 21l9-7v14l-9 7z" fill="#17657b"/><path d="M9 28h21m-4-3 4 3-4 3" stroke="#fff" stroke-width="2" fill="none"/></symbol>
+<symbol id="i-pc" viewBox="0 0 48 48"><rect x="8" y="5" width="28" height="21" rx="2" fill="#cfd8e0" stroke="#5d6b7a"/><rect x="11" y="8" width="22" height="15" fill="#7fb5e6"/><rect x="16" y="27" width="12" height="3" fill="#8a99a8"/><rect x="9" y="32" width="26" height="7" rx="1" fill="#b8c4cf" stroke="#5d6b7a"/></symbol>
+<symbol id="i-server" viewBox="0 0 48 48"><rect x="12" y="4" width="24" height="40" rx="2" fill="#cfd8e0" stroke="#5d6b7a"/><rect x="15" y="9" width="18" height="6" fill="#5d6b7a"/><rect x="15" y="19" width="18" height="6" fill="#5d6b7a"/><circle cx="30" cy="36" r="3" fill="#2ecc71"/></symbol>
+<symbol id="i-cloud" viewBox="0 0 48 48"><path d="M12 36a8 8 0 010-16 11 11 0 0121-3 9 9 0 012 19z" fill="#dce8f4" stroke="#7b95ad" stroke-width="2"/></symbol></defs></svg>
+<header><div class="logo"><svg width="34" height="34"><use href="#i-router"/></svg><b>AutoRed<small>Automatizacion de redes para Cisco Packet Tracer &middot; v2.4</small></b></div><span id="st" class="pill off">Motor: comprobando...</span></header>
+<div class="tabs"><span class="on">Logical</span><span>Intencion &rarr; Red</span></div>
+<main><section>
+<div class="c"><h2>Catálogo de laboratorios</h2><div><div class="row" id="cf" style="margin-top:0"></div><div class="row"><input id="bq" placeholder="Buscar (ej: ospf, vlan, nat)..." style="flex:1;min-width:140px"><select id="ct" style="width:auto"><option value="*">Todas las categorías</option></select></div><div class="n" id="pg"></div><div id="cl"></div><div class="n" id="cd">Elige un laboratorio o describe tu red abajo.</div><div class="row" id="rp" style="display:none"><label>PCs por LAN&nbsp;<input id="npc" type="number" min="1" max="8" placeholder="auto" style="width:90px"></label></div></div></div>
+<div class="c"><h2>1. Describe tu red</h2><div><textarea id="tx" rows="3" placeholder="Ej: red estrella con 3 switches y 2 pcs"></textarea><div class="row" id="ej"></div><div id="hs"></div><div class="row"><button id="bi">Interpretar</button></div></div></div>
+<div class="c"><h2>2. Esto entendi (editable)</h2><div><div id="en" class="n">Aun nada.</div><div id="nt"></div>
+<div class="row"><label><input type="checkbox" id="pr" style="width:auto"> Modo prueba (no enviar a Packet Tracer)</label></div>
+<div class="row"><button id="bc" class="g" disabled>Construir en Packet Tracer</button></div></div></div>
+<div class="c"><h2>Carpeta de proyectos</h2><div><input id="cp" placeholder="Ej: D:\Proyectos_PT\Lab1"><div class="row"><button id="bb" class="t" style="margin:0">Examinar...</button><button id="ba">Usar esta carpeta</button></div><div class="n" id="cn">Cargando...</div></div></div></section>
+<section><div class="c"><h2>3. Espacio de trabajo logico</h2><div>
+<div class="k"><div><b id="kd">-</b>Dispositivos</div><div><b id="ke">-</b>Enlaces</div><div><b id="kv">-</b>Validacion</div></div>
+<div id="ws"><svg class="d" id="sv" viewBox="0 0 400 200"></svg></div>
+<div class="tray"><span><svg width="22" height="22"><use href="#i-router"/></svg>Router</span><span><svg width="22" height="22"><use href="#i-switch"/></svg>Switch</span><span><svg width="22" height="22"><use href="#i-pc"/></svg>PC</span><span><svg width="22" height="22"><use href="#i-server"/></svg>Servidor</span><span><svg width="22" height="22"><use href="#i-cloud"/></svg>Nube</span></div>
+<div class="row"><span class="n" id="ms">Describe una red y pulsa Interpretar.</span></div><div id="ex"></div><div class="row"><button id="bs" disabled>Guardar proyecto (.pkt)</button><button id="bx" disabled>Exportar informe (.html)</button><button id="bl" disabled>Limpiar lienzo de Packet Tracer</button></div></div></div>
+<div class="c"><h2>4. Verificar conexion</h2><div><button id="bv" class="v" disabled>Verificar conexion en Packet Tracer</button> <button id="bp" class="v" disabled>Ver estado de protocolos</button><div id="vr" style="margin-top:10px"></div><div id="lp"></div></div></div>
+<div class="c"><h2>5. Práctica de fallas</h2><div><div id="fl" class="n">Construye un laboratorio del catálogo para practicar fallas.</div></div></div>
+<div class="c"><h2>6. Autoverificación del catálogo</h2><div>
+<div class="n">Construye cada laboratorio en tu Packet Tracer, ejecuta sus pruebas (y, si quieres, sus fallas) y limpia el lienzo. Sirve para comprobar qué laboratorios funcionan en tu equipo. Tarda varios minutos: no uses la app mientras corre y deja el lienzo vacío.</div>
+<div class="row"><select id="au-a" style="width:auto"><option value="CCNA">Todos los CCNA</option><option value="CCNP">Todos los CCNP</option><option value="sel">Solo el laboratorio seleccionado</option><option value="todos">Todo el catálogo</option></select>
+<label><input type="checkbox" id="au-f" style="width:auto"> Incluir fallas</label><button id="au-i" class="v">Iniciar</button><button id="au-c" class="t" disabled>Cancelar</button><button id="au-d" class="t" disabled>Descargar resultados</button></div>
+<div id="au-p" class="n"></div><div id="au-r"></div></div></div>
+<div class="c"><h2>Registro del motor</h2><div><pre id="lg">Sin actividad.</pre></div></div></section></main>
+<script>
+const $=s=>document.querySelector(s),EJ=["red estrella con 3 switches y 2 pcs","router on a stick con 3 vlans","triangulo de 3 routers con ospf y dhcp","oficina con wifi y 2 laptops","red con 4 routers eigrp e ipv6"];
+let P={},PL=null,AIS=false,T="",VR=null,EX=[],CAT=[],LAB=null,NIV="Todos",PRB=null,FAL=[],LECT=[],PRB0=null,LABC=null,FACT=null,LEC=[],FLOG=[];const post=(u,b)=>fetch(u,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)}).then(r=>r.json());
+$("#ej").innerHTML=EJ.map(e=>`<button class="t">${e}</button>`).join("");document.querySelectorAll(".t").forEach(b=>b.onclick=()=>{$("#tx").value=b.textContent;interp()});
+const OP={template:["single_lan","multi_lan","multi_lan_wan","star","hub_spoke","branch_office","router_on_a_stick","three_router_triangle"],routing:["static","ospf","eigrp","rip","none"],router_model:["1941","2901","2911","ISR4321"],switch_model:["2960-24TT","3560-24PS"]},
+LB={nat_pat:"NAT/PAT (salida a internet)",aislar_ultima_lan:"Aislar última LAN (ACL)",seguridad_basica:"Seguridad básica (banner, enable secret)",port_security:"Port security en puertos de acceso"};
+const campo=(k,v)=>OP[k]?`<select data-k="${k}">${OP[k].map(o=>`<option${o==v?" selected":""}>${o}</option>`).join("")}</select>`:`<input data-k="${k}" ${typeof v=="boolean"?"type=checkbox "+(v?"checked":""):`value="${v}"`}>`;
+async function interp(){LAB=null;if(CAT.length)pintarCat();const r=await post("/api/interpretar",{texto:$("#tx").value});P=r.params;
+ $("#en").innerHTML=Object.keys(P).length?'<div class="f">'+Object.entries(P).map(([k,v])=>`<label>${LB[k]||k}</label>${campo(k,v)}`).join("")+"</div>":"Nada reconocido.";
+ $("#nt").innerHTML=r.notas.map(n=>`<div class="n">Aviso: ${n}</div>`).concat(r.errores.map(n=>`<div class="n e">${n}</div>`)).join("")+((r.labs||[]).length&&CAT.length?`<div class="n">Sugerencias del catálogo: ${r.labs.map(id=>`<a href="#" style="color:var(--a)" onclick="elegirLab('${id}');return false">${esc(CAT.find(x=>x.id==id).titulo)}</a>`).join(" &middot; ")}</div>`:"");$("#bc").disabled=!r.ok}
+function leer(){const o={};document.querySelectorAll("[data-k]").forEach(i=>{const k=i.dataset.k,v=P[k];o[k]=typeof v=="boolean"?i.checked:typeof v=="number"?+i.value:i.value});return o}
+async function construir(){$("#bc").disabled=true;$("#bv").disabled=true;$("#bp").disabled=true;$("#lp").innerHTML="";$("#vr").innerHTML="";$("#ex").innerHTML="";$("#bs").disabled=true;$("#bx").disabled=true;$("#bl").disabled=true;$("#ms").textContent="Construyendo... (la primera vez tarda)";
+ AIS=!LAB&&!!leer().aislar_ultima_lan;const r=LAB?await post("/api/catalogo/construir",{id:LAB,deploy:!$("#pr").checked,pcs:$("#npc").value?+$("#npc").value:null}):await post("/api/construir",{params:leer(),deploy:!$("#pr").checked});PRB=r.pruebas||null;FAL=[];pintarFallas();$("#bc").disabled=false;
+ if(!r.ok){$("#ms").innerHTML='<span class="e">'+r.error+"</span>";return}
+ const m=r.resumen;$("#kd").textContent=m.dispositivos||"-";$("#ke").textContent=m.enlaces||"-";$("#kv").textContent=m.validacion;PL=r.plan;
+ $("#ms").textContent=(m.desplegado?"Desplegado en Packet Tracer.":"Solo planificado (modo prueba o sin canal con Packet Tracer).")+(r.nota?" "+r.nota:"");$("#lg").textContent=r.texto;
+ $("#bv").disabled=!(m.desplegado&&PL);$("#bp").disabled=!(m.desplegado&&PL);$("#bs").disabled=!m.desplegado;$("#bl").disabled=!m.desplegado;$("#bx").disabled=!PL;T=r.texto;FAL=r.fallas||[];LECT=r.lecturas||[];PRB0=PRB;LABC=LAB;pintarFallas();EX=r.extras||[];guardarHist($("#tx").value);if(PL)dibujar(PL);
+ $("#ex").innerHTML=(r.extras||[]).map(x=>`<div class="vr"><i style="color:var(${x.ok?"--ok":x.ok===null?"--m":"--er"})">${x.ok?"&#10004;":x.ok===null?"?":"&#10008;"}</i><span>${x.nombre}</span><small>${x.ok?(m.desplegado?"aplicado":"validado (modo prueba)"):x.ok===null?"pendiente":"no aplicado"}</small></div><div class="n">${x.texto.split("\n")[0]}</div>`).join("")}
+function dibujar(p){const d=p.devices,m={};d.forEach(x=>m[x.name]=x);const X=d.map(x=>x.x),Y=d.map(x=>x.y),x0=Math.min(...X)-60,y0=Math.min(...Y)-50,w=Math.max(...X)-x0+60,h=Math.max(...Y)-y0+70;
+ const ic=c=>({router:"router",switch:"switch",server:"server",cloud:"cloud"}[c]||"pc");let s="";
+ p.links.forEach(l=>{const a=m[l.device_a],b=m[l.device_b];if(!a||!b)return;s+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" style="stroke:var(--m)" stroke-width="2"${a.category=="router"&&b.category=="router"?' stroke-dasharray="7 5"':""}/>`;
+  [[a,b],[b,a]].forEach(([u,v])=>{const k=26/Math.hypot(v.x-u.x,v.y-u.y);s+=`<circle cx="${u.x+(v.x-u.x)*k}" cy="${u.y+(v.y-u.y)*k}" r="3.5" fill="#2ecc71"/>`})});
+ d.forEach(x=>s+=`<use href="#i-${ic(x.category)}" x="${x.x-22}" y="${x.y-22}" width="44" height="44"/><text x="${x.x}" y="${x.y+36}">${x.name}</text>`);
+ $("#sv").setAttribute("viewBox",`${x0} ${y0} ${w} ${h}`);$("#sv").innerHTML=s}
+async function verificar(){$("#bv").disabled=true;$("#vr").innerHTML='<div class="n">Ejecutando pings en Packet Tracer...</div>';
+ const r=await post("/api/verificar",{plan:PL,aislar:AIS,pruebas:PRB});VR=r;if(LABC&&r.total&&r.ok==r.total&&!FACT)marcar(LABC);$("#bv").disabled=false;
+ $("#vr").innerHTML=`<div class="n"><b>${r.ok} de ${r.total}</b> pruebas como se esperaba${r.con_perdida?` &middot; <span style="color:#c77d00">${r.con_perdida} con p&eacute;rdida de paquetes (pasa el cursor)</span>`:""}</div>`+r.resultados.map(x=>`<div class="vr" title="${esc(x.texto||"")}"><i style="color:${ic(x)[0]}">${ic(x)[1]}</i><span>${x.de} &rarr; ${x.a} <small>(${x.tipo})</small></span><small>${rl(x)}</small></div>`).join("")+(r.resultados.some(x=>x.cumple===false)?'<div class="row"><button id="bd" class="v">Diagnosticar los fallos</button></div><div id="dg"></div>':"");if($("#bd"))$("#bd").onclick=()=>diagnosticar(r)}
+const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])),HK="autored_hist";let H=[];try{H=JSON.parse(localStorage.getItem(HK)||"[]")}catch(e){}
+function histo(){$("#hs").innerHTML=H.length?'<div class="n">Recientes:</div>'+H.map(x=>`<button class="t h">${esc(x)}</button>`).join(""):"";document.querySelectorAll(".h").forEach(b=>b.onclick=()=>{$("#tx").value=b.textContent;interp()})}
+function guardarHist(t){t=t.trim();if(!t)return;H=[t,...H.filter(x=>x!=t)].slice(0,6);try{localStorage.setItem(HK,JSON.stringify(H))}catch(e){}histo()}
+function informe(){if(!PL)return;const d=PL.devices,rows=(a,f)=>a.map(f).join("");
+ const css="body{font:14px sans-serif;max-width:900px;margin:24px auto;color:#16222e}h1{color:#0f2d4d}h2{border-bottom:2px solid #2aa3d8;padding-bottom:4px;margin-top:28px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #c9d3dd;padding:5px 8px;text-align:left;font-size:13px}th{background:#e9eef3}pre{background:#f4f6fa;padding:10px;overflow:auto;font-size:12px}svg.d{width:100%;height:340px}svg text{font:11px sans-serif;text-anchor:middle}:root{--m:#5d6b7a;--t:#16222e}";
+ const cli=(T.split("CLI CONFIGURATIONS")[1]||"").split("SUGGESTED CHECKS")[0].replace(/=+/g,"").trim();
+ const dir=rows(d.filter(x=>Object.keys(x.interfaces||{}).length),x=>Object.entries(x.interfaces).map(([i,ip])=>`<tr><td>${esc(x.name)}</td><td>${esc(i)}</td><td>${esc(ip)}</td><td>${esc(x.gateway||"")}</td></tr>`).join(""));
+ const ver=VR?`<h2>Verificaci&oacute;n de conectividad (${VR.ok} de ${VR.total} como se esperaba)</h2><table><tr><th>Origen</th><th>Destino</th><th>Tipo</th><th>Resultado</th></tr>${rows(VR.resultados,x=>`<tr><td>${esc(x.de)}</td><td>${esc(x.a)}</td><td>${esc(x.tipo)}</td><td>${esc(rl(x))}</td></tr>`)}</table>`:"";
+ const ext=EX.length?`<h2>Configuraci&oacute;n adicional</h2>${EX.map(x=>`<p><b>${esc(x.nombre)}</b>: ${esc(x.texto)}</p>${x.cli?`<pre>${esc(x.cli)}</pre>`:""}`).join("")}`:"";
+ const lb=LABC?CAT.find(x=>x.id==LABC):null,desc=lb?`<p><b>Objetivo:</b> ${esc(lb.descripcion)}</p>`:"";
+ const lec=(LEC.length?`<h2>Estado de protocolos</h2>${LEC.map(s=>`<h3>${esc(s.titulo)}</h3><pre>${esc(s.texto)}</pre>`).join("")}`:"")+(FLOG.length?`<h2>Fallas practicadas</h2><ul>${FLOG.map(f=>`<li>${esc(f.t)}: ${f.a=="inyectar"?"inyectada":"reparada"}</li>`).join("")}</ul>`:"");
+ const html=`<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>Informe AutoRed</title><style>${css}</style></head><body>${document.querySelector("svg[width='0']").outerHTML}<h1>Informe de red - AutoRed</h1><p>Solicitud: <i>${esc(LAB?(CAT.find(x=>x.id==LAB)||{}).titulo:$("#tx").value)}</i><br>Fecha: ${new Date().toLocaleString("es-PE")}</p>${desc}<h2>Diagrama</h2>${$("#sv").outerHTML}<h2>Dispositivos</h2><table><tr><th>Nombre</th><th>Modelo</th><th>Tipo</th></tr>${rows(d,x=>`<tr><td>${esc(x.name)}</td><td>${esc(x.model)}</td><td>${esc(x.category)}</td></tr>`)}</table><h2>Tabla de direccionamiento</h2><table><tr><th>Dispositivo</th><th>Interfaz</th><th>IP/Prefijo</th><th>Gateway</th></tr>${dir}</table><h2>Enlaces</h2><table><tr><th>Dispositivo A</th><th>Puerto A</th><th>Dispositivo B</th><th>Puerto B</th><th>Cable</th></tr>${rows(PL.links,l=>`<tr><td>${esc(l.device_a)}</td><td>${esc(l.port_a)}</td><td>${esc(l.device_b)}</td><td>${esc(l.port_b)}</td><td>${esc(l.cable)}</td></tr>`)}</table>${ver}${ext}${lec}<h2>Configuraci&oacute;n CLI</h2><pre>${esc(cli||"No disponible")}</pre></body></html>`;
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([html],{type:"text/html"}));a.download="informe_autored.html";a.click()}
+async function cargarCfg(){const r=await(await fetch("/api/config")).json();$("#cp").value=r.carpeta||"";$("#cn").textContent=r.carpeta?"Proyectos y archivos exportados se guardan en: "+r.carpeta:"Por defecto: carpeta de Packet Tracer y del usuario (normalmente el disco C:)."}
+async function aplicarCarpeta(){$("#cn").textContent="Aplicando... (el motor se reinicia unos segundos)";const r=await post("/api/config",{carpeta:$("#cp").value});$("#cn").innerHTML=r.ok?"Carpeta guardada: "+esc(r.carpeta||"(por defecto)")+". Construye de nuevo en Packet Tracer para usarla.":'<span class="e">'+esc(r.error)+"</span>";estado()}
+async function elegirCarpeta(){$("#cn").textContent="Abriendo el selector de carpetas (puede quedar detras del navegador)...";const r=await post("/api/elegir_carpeta",{});if(r.carpeta){$("#cp").value=r.carpeta;aplicarCarpeta()}else $("#cn").textContent=r.error?"No pude abrir el selector; escribe la ruta a mano.":"No elegiste ninguna carpeta."}
+function latido(){fetch("/api/latido",{method:"POST"}).catch(()=>{})}
+addEventListener("pagehide",()=>{try{navigator.sendBeacon("/api/cerrar")}catch(e){}});
+async function cargarCat(){try{CAT=await(await fetch("/api/catalogo")).json();$("#ct").innerHTML='<option value="*">Todas las categorías</option>'+[...new Set(CAT.map(l=>l.categoria))].sort().map(c=>`<option>${esc(c)}</option>`).join("");pintarCat()}catch(e){}}
+const sinAc=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const lee=k=>{try{return JSON.parse(localStorage.getItem(k)||"[]")}catch(e){return[]}},guarda=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+function marcar(id){const h=lee("autored_hechos");if(!h.includes(id)){h.push(id);guarda("autored_hechos",h)}pintarCat()}
+function marcarFalla(k){const f=lee("autored_fallas");if(!f.includes(k)){f.push(k);guarda("autored_fallas",f)}pintarCat()}
+function pintarCat(){const q=sinAc($("#bq").value||""),ct=$("#ct").value,hh=lee("autored_hechos");
+ $("#cf").innerHTML=["Todos","CCNA","CCNP"].map(n=>`<button class="t${n==NIV?" sel":""}" data-n="${n}">${n}</button>`).join("");
+ document.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{NIV=b.dataset.n;pintarCat()});
+ const lista=CAT.filter(l=>(NIV=="Todos"||l.nivel==NIV)&&(ct=="*"||l.categoria==ct)&&(!q||sinAc(l.titulo+" "+l.descripcion+" "+l.categoria).includes(q)));
+ $("#cl").innerHTML=lista.map(l=>`<div class="lab${l.id==LAB?" on":""}" data-l="${l.id}"><b>${hh.includes(l.id)?"&#10004; ":""}${esc(l.titulo)}</b><small>${esc(l.nivel)} &middot; ${esc(l.categoria)}${l.tipo=="laboratorio"?" &middot; laboratorio completo":""}</small></div>`).join("")||'<div class="n">Sin resultados.</div>';
+ const labs=CAT.filter(l=>l.tipo=="laboratorio");$("#pg").textContent=`Completados: ${labs.filter(l=>hh.includes(l.id)).length} de ${labs.length} laboratorios \u00b7 Fallas practicadas: ${lee("autored_fallas").length}`;
+ document.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>elegirLab(b.dataset.l))}
+function elegirLab(id){const l=CAT.find(x=>x.id==id);if(!l)return;
+ if(l.tipo=="plantilla"){$("#rp").style.display="none";$("#tx").value=l.frase;interp();$("#cd").textContent=l.descripcion;return}
+ LAB=id;$("#rp").style.display=l.param_pcs?"flex":"none";$("#npc").value="";pintarCat();$("#cd").innerHTML=`<b>${esc(l.titulo)}</b><br>${esc(l.descripcion)}${l.nota?`<br><i>${esc(l.nota)}</i>`:""}`;
+ $("#en").textContent="Laboratorio del cat\u00e1logo seleccionado: no necesita par\u00e1metros.";$("#nt").innerHTML="";$("#bc").disabled=false}
+async function limpiar(){if(!PL||!confirm("Se borraran de Packet Tracer los "+PL.devices.length+" equipos de esta red. Continuar?"))return;
+ $("#ms").textContent="Limpiando el lienzo...";const r=await post("/api/limpiar",{plan:PL});
+ $("#ms").textContent=r.ok?`Lienzo limpio: ${r.borrados} equipos eliminados.`+(r.errores.length?" No se pudo borrar: "+r.errores.join(", "):""):"Error: "+r.error;
+ if(r.ok){$("#bv").disabled=true;$("#bp").disabled=true;$("#lp").innerHTML="";$("#bl").disabled=true;$("#vr").innerHTML="";FAL=[];pintarFallas()}}
+async function diagnosticar(r){$("#dg").innerHTML='<div class="n">Leyendo tablas de rutas y probando gateways...</div>';
+ const d=await post("/api/diagnostico",{plan:PL,fallos:r.resultados.filter(x=>x.cumple===false).map(x=>({de:x.de,a:x.a}))});
+ $("#dg").innerHTML='<div class="n"><b>Diagn&oacute;stico orientativo</b></div>'+d.hallazgos.map(x=>`<div class="n">&bull; ${esc(x)}</div>`).join("")}
+async function lecturas(){$("#bp").disabled=true;$("#lp").innerHTML='<div class="n">Leyendo el estado de Packet Tracer...</div>';
+ const r=await post("/api/lecturas",{plan:PL,lecturas:LECT});$("#bp").disabled=false;
+ LEC=r.secciones;$("#lp").innerHTML=r.secciones.map(s=>`<details style="margin-top:8px"><summary><b>${esc(s.titulo)}</b></summary><pre>${esc(s.texto)}</pre></details>`).join("")}
+function pintarFallas(){const e=$("#fl");if(!FAL.length){e.textContent=LABC?"Este laboratorio no tiene fallas definidas.":"Construye un laboratorio del cat\u00e1logo para practicar fallas.";return}
+ e.innerHTML=FAL.map(f=>`<div class="lab"><b>${esc(f.titulo)}</b><small>${esc(f.descripcion)}${f.espera?" ("+esc(f.espera)+")":""}</small><div class="row"><button class="t" data-a="inyectar" data-id="${f.id}">Inyectar falla</button><button class="t" data-a="reparar" data-id="${f.id}">Reparar</button><button class="t" data-a="pista" data-id="${f.id}">Ver pista</button></div><div class="n" id="fx-${f.id}"></div></div>`).join("");
+ e.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>falla(b.dataset.id,b.dataset.a))}
+async function falla(id,acc){const f=FAL.find(x=>x.id==id),o=$("#fx-"+id);
+ if(acc=="pista"){o.textContent="Pista: "+f.pista;return}
+ o.textContent=acc=="inyectar"?"Inyectando la falla...":"Reparando...";
+ const r=await post("/api/falla",{lab:LABC,falla:id,accion:acc});
+ if(!r.ok){o.innerHTML='<span class="e">'+esc((r.errores&&r.errores.length?r.errores:[r.error||"error"]).join("; "))+"</span>";return}
+ PRB=acc=="inyectar"&&r.pruebas?r.pruebas:PRB0;FACT=acc=="inyectar"?id:null;FLOG.push({t:f.titulo,a:acc});if(acc=="reparar")marcarFalla(LABC+":"+id);
+ o.textContent=acc=="inyectar"?"Falla inyectada. Pulsa Verificar conexi\u00f3n y busca la causa."+(f.espera?" "+f.espera:""):"Falla reparada. Vuelve a verificar."}
+let AUTO=null,AUTOT=null;
+async function autoIniciar(){const sel=$("#au-a").value,alc=sel=="sel"?LAB:sel;if(!alc){alert("Elige primero un laboratorio del cat\u00e1logo.");return}
+ if(!confirm("El lienzo de Packet Tracer debe estar VAC\u00cdO. AutoRed construir\u00e1 y borrar\u00e1 cada laboratorio. \u00bfContinuar?"))return;
+ const r=await post("/api/auto/iniciar",{alcance:alc,fallas:$("#au-f").checked});if(!r.ok){alert(r.error);return}
+ $("#au-i").disabled=true;$("#au-c").disabled=false;autoSondeo();AUTOT=setInterval(autoSondeo,2500)}
+async function autoCancelar(){await post("/api/auto/cancelar",{});$("#au-p").textContent="Cancelando..."}
+function rl(x){if(x.ok===null)return"sin lectura";if(!x.ok)return"sin respuesta"+(x.esperado?"":" (bloqueo esperado)");return x.calidad=="parcial"?"responde, pero pierde paquetes":x.calidad=="tras_perdida"?"responde (perdi\u00f3 paquetes al inicio)":"responde"+(x.esperado?"":" (bloqueo esperado)")}
+function ic(x){return x.cumple&&x.calidad=="parcial"?["#c77d00","&#9680;"]:x.cumple?["var(--ok)","&#10004;"]:x.cumple===false?["var(--er)","&#10008;"]:["var(--m)","?"]}
+async function autoSondeo(){const r=await(await fetch("/api/auto/estado")).json();AUTO=r;
+ $("#au-p").innerHTML=`<b>${esc(r.estado)}</b> &middot; ${r.hecho} de ${r.total}${r.actual?" &middot; ahora: "+esc(r.actual):""}<br><small>${r.log.slice(-3).map(esc).join("<br>")}</small>`;
+ $("#au-r").innerHTML=r.resultados.map(x=>{const pp=x.pruebas.filter(t=>t.cumple).length,tt=x.pruebas.length,pl=x.pruebas.filter(t=>t.cumple&&(t.calidad=="parcial"||t.calidad=="tras_perdida")).length,ok=x.construccion&&pp==tt&&x.fallas.every(f=>f.reparada&&f.efecto);
+  const det=[...x.pruebas.filter(t=>!t.cumple).map(t=>t.de+" -> "+t.a+": "+t.texto),...x.pruebas.filter(t=>t.cumple&&t.calidad=="parcial").map(t=>"pierde paquetes: "+t.de+" -> "+t.a),...(x.error?[x.error]:[]),...x.fallas.filter(f=>!f.reparada||!f.efecto).map(f=>"falla "+f.titulo+": "+(!f.reparada?"no se reparo":"sin el efecto esperado")+" "+(f.detalle||[]).join(" | "))];
+  return `<div class="vr" title="${esc(det.join("\n"))}"><i style="color:var(${ok?"--ok":"--er"})">${ok?"&#10004;":"&#10008;"}</i><span>${esc(x.titulo)} <small>(${esc(x.nivel)})</small></span><small>${x.construccion?"pruebas "+pp+"/"+tt+(pl?" ("+pl+" con p\u00e9rdida)":""):"no se construy\u00f3"}${x.fallas.length?" &middot; fallas "+x.fallas.filter(f=>f.efecto&&f.reparada).length+"/"+x.fallas.length:""}</small></div>`}).join("");
+ if(r.estado!="corriendo"){clearInterval(AUTOT);$("#au-i").disabled=false;$("#au-c").disabled=true;$("#au-d").disabled=!r.resultados.length}}
+function autoDescargar(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(AUTO,null,1)],{type:"application/json"}));a.download="autoverificacion_autored.json";a.click()}
+async function guardar(){const n=prompt("Nombre del archivo (sin extension):","mi_red");if(!n)return;const r=await post("/api/guardar",{nombre:n});$("#ms").textContent=r.ok?"Guardado: "+r.texto.split("\n")[0]:"Error: "+r.error}
+async function estado(){try{const r=await(await fetch("/api/estado")).json(),e=$("#st");e.textContent=r.motor?"Motor: conectado":"Motor: sin conexion";e.className="pill "+(r.motor?"on2":"off");e.title=r.texto}catch(e){}}
+$("#bi").onclick=interp;$("#bs").onclick=guardar;$("#bx").onclick=informe;$("#bl").onclick=limpiar;$("#bp").onclick=lecturas;$("#bq").oninput=pintarCat;$("#au-i").onclick=autoIniciar;$("#au-c").onclick=autoCancelar;$("#au-d").onclick=autoDescargar;$("#ct").onchange=pintarCat;$("#st").onclick=async()=>{if($("#st").classList.contains("off")){$("#st").textContent="Motor: reconectando...";await post("/api/reiniciar",{});setTimeout(estado,5000)}};histo();$("#bb").onclick=elegirCarpeta;$("#ba").onclick=aplicarCarpeta;cargarCfg();cargarCat();pintarFallas();latido();setInterval(latido,4000);$("#bc").onclick=construir;$("#bv").onclick=verificar;$("#tx").onkeydown=e=>{if(e.key=="Enter"&&!e.shiftKey){e.preventDefault();interp()}};estado();
+</script></body></html>
