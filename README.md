@@ -4,7 +4,11 @@ AutoRed construye, configura, verifica y pone a prueba redes en Cisco Packet Tra
 
 ## Demostración
 
-<!-- VIDEO: en github.com, edita este archivo y arrastra aquí tu video .mp4 (máx. 10 MB). Borra esta línea después. -->
+
+
+https://github.com/user-attachments/assets/d367eeeb-e891-451b-be3c-14aabce719c5
+
+
 
 | Interfaz | Red en Packet Tracer | Verificación |
 |---|---|---|
@@ -123,10 +127,10 @@ Uso: escribir una frase (por ejemplo `red estrella con 3 switches y 2 pcs`) o el
 - Bray, T. (2017). *RFC 8259: The JavaScript Object Notation (JSON) Data Interchange Format*. IETF.
 - Flask, documentación. https://flask.palletsprojects.com
 
-## 10. Autor, curso y docente
+## 10. Datos, curso y docente
 
-- **Autor:** Joseph Emmanuel Bernales Flores (código 1332022029) — Universidad Nacional de Piura, Escuela de Ingeniería Electrónica y Telecomunicaciones, IX ciclo.
+- **Datos:**  Universidad Nacional de Piura, Escuela de Ingeniería Electrónica y Telecomunicaciones, X ciclo.
 - **Curso:** Gestión de Redes (CCNA 3, módulo 14).
 - **Docente:** Ing. Flores Córdova, Daniel Alonso.
 - **Fecha:** noviembre de 2026.
-- **Herramientas:** el código se desarrolló con la asistencia de Claude (Anthropic). El autor definió los requisitos, ejecutó la aplicación y la autoverificación en su propio Packet Tracer, reportó los fallos encontrados y validó las correcciones.
+- **Herramientas:** Python, Flask (servidor.py), Cisco Packet Tracer , Control de Packet Tracer: MCP-Packet-Tracer de Mats2208 (paquete packet-tracer-mcp) y Model Context Protocol (MCP) sobre JSON-RPC 2.0
